@@ -1,19 +1,16 @@
-//need to secure this in a file
-//need to secure this and weather api urgent!
-
 import { ACCESS_TOKEN, EXPIRES_IN, TOKEN_TYPE } from "../common";
 
-const CLIENT_ID = import.meta.VITE_CLIENT_ID;
-const scopers = "user-top-read user-follow-read playlist-read-private user-library-read";
-const REDIRECT_URI = "http://localhost:3000/login/login.html";
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+const HOST = import.meta.env.VITE_HOST;
 var state = (Math.random()+1).toString(36).substring(1); //generate random number
-const HOST = "http://localhost:3000"
+const scopes = "user-top-read user-follow-read playlist-read-private user-library-read";
 
 const authorizeUser = () =>{
     var url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';
     url += '&client_id='+CLIENT_ID;
-    url += '&scope='+scopers;
+    url += '&scope='+scopes;
     url += '&redirect_uri='+REDIRECT_URI;
     url += '&state='+ state;
     url += '&show_dialog=true'; //to not login again
@@ -27,7 +24,7 @@ document.addEventListener("DOMContentLoaded",() =>{
 window.setItemsInLocalStorage = ({accessToken,tokenType,expiresIn})=>{
     localStorage.setItem(ACCESS_TOKEN,accessToken);
     localStorage.setItem(TOKEN_TYPE,tokenType);
-    localStorage.setItem(EXPIRES_IN,expiresIn);
+    localStorage.setItem(EXPIRES_IN,(Date.now()+(expiresIn*1000)));
     window.location.href = HOST;
 }
 window.addEventListener("load",()=>{
