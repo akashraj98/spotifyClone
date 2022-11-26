@@ -12,8 +12,13 @@ module.exports = {
         "primary": "#FFFFFF",
         "secondary": "#b3b3b3",
         "gray": "#535353"
-      }
+      },
+      gridTemplateColumns: {
+        'auto-fill-cards': 'repeat(auto-fill, minmax(200px, 1fr))'
+      },
     },
   },
-  plugins: [],
+  plugins:[
+    require('@tailwindcss/line-clamp'),
+  ],
 }
