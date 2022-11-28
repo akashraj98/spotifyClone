@@ -1,4 +1,5 @@
 import { build, defineConfig, loadEnv, resolveBaseUrl } from 'vite'
+import {resolve} from 'path'
 
 export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
