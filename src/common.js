@@ -5,9 +5,10 @@ const APP_URL = import.meta.env.VITE_HOST;
 
 export const ENDPOINT = {
     userInfo: "me",
-    featuredPlaylist: "browse/featured-playlists?limit=5",
-    topLists:"browse/categories/toplists/playlists?limit=10",
-    playList:"playlists"
+    featuredPlaylist: "browse/featured-playlists?limit=7",
+    topLists:"browse/categories/toplists/playlists?limit=7",
+    playList:"playlists",
+    userPlaylist: "me/playlists"
 }
 
 export const logout = ()=>{
