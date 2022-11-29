@@ -7,6 +7,10 @@ export const ENDPOINT = {
     userInfo: "me",
     featuredPlaylist: "browse/featured-playlists?limit=7",
     topLists:"browse/categories/toplists/playlists?limit=7",
+    punjabi:"browse/categories/0JQ5DAqbMKFKSopHMaeIeI/playlists?limit=7",
+    pop:"browse/categories/0JQ5DAqbMKFEC4WFtoNRpw/playlists?limit=7",
+    devotion:"browse/categories/0JQ5DAqbMKFOTGtSOysEXE/playlists?limit=7",
+    bollywood:"browse/categories/0JQ5DAqbMKFHCxg5H5PtqW/playlists?limit=7",
     playList:"playlists",
     userPlaylist: "me/playlists"
 }

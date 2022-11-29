@@ -57,13 +57,25 @@ const loadPlaylist = async(endpoint,elementId) =>{
 const loadPlaylists = ()=>{
     loadPlaylist(ENDPOINT.featuredPlaylist,"featured-playlist-items");
     loadPlaylist(ENDPOINT.topLists,"top-playlist-items");
+    loadPlaylist(ENDPOINT.punjabi,"punjabi-items");
+    loadPlaylist(ENDPOINT.bollywood,"bollywood-items");
+    loadPlaylist(ENDPOINT.pop,"pop-items");
+    loadPlaylist(ENDPOINT.devotion,"devotion-items");
+    
+
 }
 
 const fillContentForDashboard = () =>{
     let pageContent = document.querySelector("#page-content");
     const coverContent = document.querySelector("#cover-content");
     coverContent.innerHTML = `<h1 class="text-6xl">Hello ${displayName}</h1>`
-    const playlistMap = new Map([["featured","featured-playlist-items"],["top playlist","top-playlist-items"]]);
+    const playlistMap = new Map([
+        ["featured","featured-playlist-items"],
+        ["top playlist","top-playlist-items"],
+        ["punjabi","punjabi-items"],
+        ["devotion","devotion-items"],
+        ["pop","pop-items"],
+        ["bollywood","bollywood-items"]]);
     let innerHTML = "";
     for (let [type,id] of playlistMap){
         innerHTML +=`<article class="p-4">
@@ -225,15 +237,28 @@ const onContentScroll =(event)=>{
     const header = document.querySelector(".header");
     const coverElement = document.querySelector("#cover-content");
     const totalHeight = coverElement.offsetHeight;
+    const fiftyPercentHeight = totalHeight/2;
     const coverOpacity = 100 - (scrollTop >= totalHeight? 100:((scrollTop/totalHeight)*100));
-    const headerOpacity = scrollTop >= header.offsetHeight? 100 : ((scrollTop/header.offsetHeight)*100);
-    coverElement.style.opacity = `${coverOpacity}%`
-    header.style.background = `rgba(0 0 0/${headerOpacity}%)`;
 
+    let headerOpacity = 0 //scrollTop >= header.offsetHeight? 100 : ((scrollTop/header.offsetHeight)*100);
+    coverElement.style.opacity = `${coverOpacity}%`
+    // header.style.background = `rgba(0 0 0/${headerOpacity}%)`;
+
+    if (scrollTop >= fiftyPercentHeight && scrollTop <= totalHeight) {
+        let totalDistance = totalHeight - fiftyPercentHeight;
+        let coveredDistance = scrollTop - fiftyPercentHeight;
+        headerOpacity = (coveredDistance / totalDistance) * 100;
+    } else if (scrollTop > totalHeight) {
+        headerOpacity = 100;
+    } else if (scrollTop < fiftyPercentHeight) {
+        headerOpacity = 0;
+    }
+
+    header.style.background = `rgba(0 0 0 / ${headerOpacity}%)`
     if(history.state.type === SECTIONTYPE.PLAYLIST){
-        let coverContent = document.querySelector("#cover-content");
+        // let coverContent = document.querySelector("#cover-content");
         const playListHeader = document.querySelector("#playlist-header");
-        if (coverOpacity <= 35){
+        if (headerOpacity >= 60){
             playListHeader.classList.add("sticky","bg-black-secondary","px-8");
             playListHeader.classList.remove("mx-8")
             playListHeader.style.top = `${header.offsetHeight}px`;
