@@ -15,7 +15,7 @@ This project is made with vanilla-javascript and tailwind-css.
 [spotifyClone - Netlify](https://spotifyclone-project.netlify.app/)
 
 ## Demo
-[![Demo video]({image-url})]({https://youtu.be/W1JEkWwEHDY} "Spotify Clone Demo")
+[![Demo video]({https://github.com/akashraj98/spotifyClone/blob/main/src/assets/spotifyCloness.png})]({https://youtu.be/W1JEkWwEHDY} "Spotify Clone Demo")
 
 ## How to Run
 
